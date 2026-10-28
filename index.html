@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="./image-slot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f4f2;color:#111;font-family:'Archivo',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#111;text-decoration:none}
+a:hover{color:oklch(0.62 0.2 38)}
+button{font-family:inherit}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column">
+
+  <div style="background:#111;color:#f4f4f2;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;padding:10px 24px;text-align:center">
+    {{ shippingNote }}
+  </div>
+
+  <header style="position:sticky;top:0;z-index:20;background:rgba(244,244,242,0.92);backdrop-filter:blur(8px);border-bottom:1px solid #111">
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px">
+        <a href="#" style="display:block;min-width:0"><img src="uploads/rallyspex-logo_000000_s5.5_a-7.png" alt="RALLYSPEX" style="height:13px;width:auto;max-width:100%;display:block"></a>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button onClick="{{ openCart }}" style="background:#111;color:#f4f4f2;border:0;height:44px;padding:0 14px;font-size:12px;letter-spacing:0.06em;cursor:pointer;display:flex;gap:8px;align-items:center">
+            <span>KORB</span><span style="font-family:'IBM Plex Mono',monospace">{{ cartCount }}</span>
+          </button>
+          <button onClick="{{ toggleMenu }}" style="border:1px solid #111;background:transparent;height:44px;padding:0 14px;font-size:12px;letter-spacing:0.06em;cursor:pointer;color:#111">{{ menuLabel }}</button>
+        </div>
+      </div>
+      <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+        <nav style="display:flex;flex-direction:column;border-top:1px solid #111;font-size:22px;font-weight:300">
+          <a href="#shop" onClick="{{ closeMenu }}" style="padding:18px 20px;border-bottom:1px solid #ddd">Shop</a>
+          <a href="#kategorien" onClick="{{ closeMenu }}" style="padding:18px 20px;border-bottom:1px solid #ddd">Kategorien</a>
+          <a href="#custom" onClick="{{ closeMenu }}" style="padding:18px 20px;border-bottom:1px solid #ddd">Custom</a>
+          <a href="#" onClick="{{ closeMenu }}" style="padding:18px 20px;border-bottom:1px solid #ddd">Suche</a>
+          <a href="#" onClick="{{ closeMenu }}" style="padding:18px 20px">Konto</a>
+        </nav>
+      </sc-if>
+    </sc-if>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+    <div style="max-width:1360px;margin:0 auto;padding:20px 32px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px">
+      <nav style="display:flex;gap:28px;font-size:14px;letter-spacing:0.04em;flex-wrap:wrap">
+        <a href="#shop">Shop</a>
+        <a href="#kategorien">Kategorien</a>
+        <a href="#custom">Custom</a>
+      </nav>
+      <a href="#" style="display:block"><img src="uploads/rallyspex-logo_000000_s5.5_a-7.png" alt="RALLYSPEX" style="height:18px;width:auto;display:block"></a>
+      <div style="display:flex;justify-content:flex-end;gap:24px;align-items:center;font-size:14px">
+        <a href="#">Suche</a>
+        <a href="#">Konto</a>
+        <button onClick="{{ openCart }}" style="background:#111;color:#f4f4f2;border:0;padding:10px 16px;font-size:13px;letter-spacing:0.06em;cursor:pointer;display:flex;gap:10px;align-items:center" style-hover="background:oklch(0.62 0.2 38)">
+          <span>WARENKORB</span><span style="font-family:'IBM Plex Mono',monospace">{{ cartCount }}</span>
+        </button>
+      </div>
+    </div>
+    </sc-if>
+  </header>
+
+  <section style="border-bottom:1px solid #111">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr))">
+      <div style="padding:clamp(48px,8vw,96px) clamp(20px,4vw,48px) clamp(40px,6vw,80px) max(clamp(20px,4vw,32px), calc((100vw - 1360px) / 2 + 32px));display:flex;flex-direction:column;justify-content:space-between;gap:clamp(32px,5vw,64px)">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;display:flex;gap:16px;align-items:center">
+          <span style="width:8px;height:8px;background:oklch(0.62 0.2 38);display:block"></span>
+          <span>Kollektion 26 / Gravel Season</span>
+        </div>
+        <h1 style="margin:0;font-weight:300;font-size:clamp(40px,6.4vw,104px);line-height:0.95;letter-spacing:-0.035em;text-wrap:pretty">Stickers und Accessoires für Menschen, die Benzin im Blut haben.</h1>
+        <div style="display:flex;gap:40px;align-items:flex-end;flex-wrap:wrap;justify-content:space-between">
+          <p style="margin:0;max-width:340px;font-size:16px;line-height:1.55;color:#444">Präzise geplottete Decals, Keyrings und Garagen-Essentials. Entworfen für Rally, Track und den Sonntagmorgen auf der Passstrasse.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a href="#shop" style="background:#111;color:#f4f4f2;padding:16px 28px;font-size:14px;letter-spacing:0.06em" style-hover="background:oklch(0.62 0.2 38);color:#f4f4f2">ZUM SHOP</a>
+            <a href="#custom" style="border:1px solid #111;padding:15px 28px;font-size:14px;letter-spacing:0.06em" style-hover="background:#111;color:#f4f4f2">CUSTOM DECAL</a>
+          </div>
+        </div>
+      </div>
+      <div style="min-height:clamp(420px,70vw,640px);position:relative;overflow:hidden;background:#0d1520">
+        <img src="uploads/pasted-1793171745588-0.png" alt="Rallyauto auf Schotter" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 70%;display:block">
+      </div>
+    </div>
+  </section>
+
+  <section id="kategorien" style="border-bottom:1px solid #111">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:1px;background:#111">
+      <sc-for list="{{ categories }}" as="c" hint-placeholder-count="3">
+        <a href="#shop" onClick="{{ c.select }}" style="background:#f4f4f2;padding:clamp(24px,4vw,40px) clamp(20px,3vw,32px) clamp(24px,3vw,32px);display:flex;flex-direction:column;gap:clamp(28px,5vw,56px)" style-hover="color:oklch(0.62 0.2 38)">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em">{{ c.num }}</span>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+            <span style="font-size:clamp(26px,4vw,32px);font-weight:300;letter-spacing:-0.02em">{{ c.name }}</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#666">{{ c.count }} Artikel →</span>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="border-bottom:1px solid #111;position:relative;height:clamp(360px,60vw,760px);clip-path:inset(0);background:#111">
+    <img src="uploads/pasted-1793171798094-0.png" alt="Sportlimousine beim Drift" style="position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;object-position:50% 55%;display:block;pointer-events:none">
+  </section>
+
+  <section id="shop" style="border-bottom:1px solid #111">
+    <div style="max-width:1360px;margin:0 auto;padding:clamp(56px,10vw,96px) clamp(20px,4vw,32px)">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(28px,5vw,48px)">
+        <h2 style="margin:0;font-weight:300;font-size:clamp(40px,7vw,56px);letter-spacing:-0.03em;line-height:1">Neu im Shop</h2>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <sc-for list="{{ filters }}" as="f" hint-placeholder-count="4">
+            <button onClick="{{ f.select }}" style="{{ f.style }}">{{ f.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(150px,30vw,280px),1fr));gap:clamp(32px,5vw,48px) clamp(12px,3vw,24px)">
+        <sc-for list="{{ products }}" as="p" hint-placeholder-count="8">
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div style="aspect-ratio:4/5;position:relative;background:#eaeae6">
+              <div style="position:absolute;inset:0">
+                <image-slot id="product-{{ p.id }}" shape="rect" src="{{ p.img }}" placeholder="{{ p.shot }}"></image-slot>
+              </div>
+              <sc-if value="{{ p.isNew }}" hint-placeholder-val="{{ false }}">
+                <span style="pointer-events:none;position:absolute;top:12px;left:12px;background:oklch(0.62 0.2 38);color:#111;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;padding:4px 8px">NEU</span>
+              </sc-if>
+            </div>
+            <div style="display:flex;justify-content:space-between;gap:6px 16px;align-items:baseline;flex-wrap:wrap">
+              <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
+                <span style="font-size:clamp(14px,2vw,16px);font-weight:500">{{ p.name }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#666">{{ p.meta }}</span>
+              </div>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:14px;white-space:nowrap">{{ p.priceLabel }}</span>
+            </div>
+            <button onClick="{{ p.add }}" style="border:1px solid #111;background:transparent;min-height:44px;padding:10px 8px;font-size:clamp(11px,1.6vw,13px);letter-spacing:0.06em;cursor:pointer;color:#111" style-hover="background:#111;color:#f4f4f2">{{ p.btnLabel }}</button>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="custom" style="background:#111;color:#f4f4f2;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr))">
+    <div style="position:relative;min-height:clamp(320px,60vw,520px);overflow:hidden">
+      <img src="uploads/pasted-1793171763380-0.png" alt="Rallyauto mit Zuschauern" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:55% 60%;display:block">
+    </div>
+    <div style="padding:clamp(56px,10vw,96px) clamp(20px,5vw,48px);display:flex;flex-direction:column;justify-content:space-between;gap:clamp(32px,5vw,56px)">
+      <div style="display:flex;flex-direction:column;gap:32px">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.1em;color:oklch(0.72 0.18 42)">CUSTOM DECALS</span>
+        <h2 style="margin:0;font-weight:300;font-size:clamp(34px,5vw,72px);line-height:1;letter-spacing:-0.03em;text-wrap:pretty">Dein Startnummernfeld. Dein Teamname. Auf Mass geplottet.</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:32px">
+        <p style="margin:0;font-size:16px;line-height:1.6;color:#c8c8c4;max-width:460px">Schick uns Vektordatei oder Skizze. Wir plotten auf Cast-Folie, matt oder glänzend, waschanlagenfest. Lieferung in 5–7 Werktagen.</p>
+        <div><a href="#" style="display:inline-block;background:#f4f4f2;color:#111;padding:16px 28px;font-size:14px;letter-spacing:0.06em" style-hover="background:oklch(0.62 0.2 38);color:#111">ANFRAGE STARTEN</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-bottom:1px solid #111">
+    <div style="max-width:1360px;margin:0 auto;padding:clamp(48px,8vw,80px) clamp(20px,4vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,4vw,40px);align-items:center">
+      <h3 style="margin:0;font-weight:300;font-size:clamp(26px,4vw,32px);letter-spacing:-0.02em">Neue Drops zuerst. Kein Spam.</h3>
+      <form onSubmit="{{ subscribe }}" style="display:flex;border:1px solid #111">
+        <input type="email" required placeholder="E-Mail-Adresse" style="flex:1;min-width:0;border:0;background:transparent;padding:16px 20px;font-size:15px;font-family:inherit;outline:none">
+        <button type="submit" style="border:0;background:#111;color:#f4f4f2;min-height:52px;padding:0 clamp(16px,3vw,28px);font-size:13px;letter-spacing:0.06em;cursor:pointer">{{ subLabel }}</button>
+      </form>
+    </div>
+  </section>
+
+  <footer style="margin-top:auto">
+    <div style="max-width:1360px;margin:0 auto;padding:clamp(48px,8vw,64px) clamp(20px,4vw,32px) 32px;display:flex;flex-direction:column;gap:clamp(40px,7vw,64px)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:32px;font-size:14px">
+        <div style="display:flex;flex-direction:column;gap:10px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#666">SHOP</span><a href="#">Stickers</a><a href="#">Accessoires</a></div>
+        <div style="display:flex;flex-direction:column;gap:10px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#666">SERVICE</span><a href="#">Versand</a><a href="#">Rückgabe</a><a href="#">Anbringungsanleitung</a></div>
+        <div style="display:flex;flex-direction:column;gap:10px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#666">RALLYSPEX</span><a href="#">Über uns</a><a href="#">Instagram</a><a href="#">Kontakt</a></div>
+        <div style="display:flex;flex-direction:column;gap:10px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#666">RECHTLICHES</span><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a></div>
+      </div>
+      <img src="uploads/rallyspex-logo_000000_s5.5_a-7.png" alt="RALLYSPEX" style="width:100%;height:auto;display:block">
+      <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#666"><span>© 2026 RALLYSPEX</span><span>MADE FOR THE STAGE</span></div>
+    </div>
+  </footer>
+
+  <sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeCart }}" style="position:fixed;inset:0;background:rgba(17,17,17,0.35);z-index:40"></div>
+    <aside style="position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:#f4f4f2;z-index:50;border-left:1px solid #111;display:flex;flex-direction:column">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:24px;border-bottom:1px solid #111">
+        <span style="font-size:14px;letter-spacing:0.06em">WARENKORB ({{ cartCount }})</span>
+        <button onClick="{{ closeCart }}" style="border:0;background:transparent;min-height:44px;font-size:13px;cursor:pointer;letter-spacing:0.06em">SCHLIESSEN</button>
+      </div>
+      <div style="flex:1;overflow:auto;padding:8px 24px;display:flex;flex-direction:column">
+        <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ true }}">
+          <p style="color:#666;font-size:15px;padding:24px 0;margin:0">Dein Warenkorb ist leer.</p>
+        </sc-if>
+        <sc-for list="{{ cartItems }}" as="ci" hint-placeholder-count="0">
+          <div style="display:grid;grid-template-columns:64px 1fr auto;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid #ddd">
+            <div style="aspect-ratio:4/5;background:#eaeae6 repeating-linear-gradient(135deg,#dfdfda 0 1px,transparent 1px 8px)"></div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <span style="font-size:14px;font-weight:500">{{ ci.name }}</span>
+              <div style="display:flex;gap:12px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12px">
+                <button onClick="{{ ci.dec }}" style="border:1px solid #111;background:transparent;width:36px;height:36px;cursor:pointer">−</button>
+                <span>{{ ci.qty }}</span>
+                <button onClick="{{ ci.inc }}" style="border:1px solid #111;background:transparent;width:36px;height:36px;cursor:pointer">+</button>
+              </div>
+            </div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px">{{ ci.lineLabel }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="padding:24px;border-top:1px solid #111;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;justify-content:space-between;font-size:15px"><span>Zwischensumme</span><span style="font-family:'IBM Plex Mono',monospace">{{ totalLabel }}</span></div>
+        <button style="background:#111;color:#f4f4f2;border:0;padding:16px;font-size:14px;letter-spacing:0.06em;cursor:pointer" style-hover="background:oklch(0.62 0.2 38)">ZUR KASSE</button>
+      </div>
+    </aside>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;currency&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;EUR&quot;,&quot;CHF&quot;],&quot;default&quot;:&quot;EUR&quot;,&quot;tsType&quot;:&quot;'EUR'|'CHF'&quot;},&quot;freeShipping&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:50,&quot;min&quot;:0,&quot;max&quot;:200,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic {
+  state = { filter: 'Alle', cart: {}, cartOpen: false, subscribed: false, menuOpen: false, w: typeof window !== 'undefined' ? window.innerWidth : 1200 };
+  onResize = () => this.setState({ w: window.innerWidth });
+  componentDidMount() { window.addEventListener('resize', this.onResize); this.onResize(); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); }
+  products = [
+    { id: 2, name: 'Linework Windshield Banner', meta: 'Decal · 120 cm', cat: 'Stickers', price: 29, isNew: true, shot: 'Frontscheiben-Banner', img: 'uploads/pasted-1793172193902-0.png' },
+    { id: 5, name: 'Tow Strap Red', meta: 'Abschleppschlaufe · universal', cat: 'Accessoires', price: 39, isNew: true, shot: 'Abschleppschlaufe', img: 'uploads/pasted-1793172111600-0.png' },
+    { id: 6, name: 'Valve Caps Set', meta: '4 Stück · Aluminium', cat: 'Accessoires', price: 16, shot: 'Ventilkappen', img: 'uploads/pasted-1793172128263-0.png' },
+    { id: 8, name: 'Co-Driver Decal Pair', meta: 'Namensdecals · personalisiert', cat: 'Stickers', price: 18, shot: 'Namens-Decal', img: 'uploads/pasted-1793172171074-0.png' },
+  ];
+  fmt(n) {
+    const cur = this.props.currency ?? 'EUR';
+    return cur === 'CHF' ? 'CHF ' + n.toFixed(2) : n.toFixed(2).replace('.', ',') + ' €';
+  }
+  setQty(id, d) {
+    this.setState(s => {
+      const cart = { ...s.cart };
+      cart[id] = (cart[id] || 0) + d;
+      if (cart[id] <= 0) delete cart[id];
+      return { cart };
+    });
+  }
+  renderVals() {
+    const { filter, cart } = this.state;
+    const cats = ['Stickers', 'Accessoires'];
+    const pill = active => `border:1px solid #111;padding:10px 18px;font-size:13px;letter-spacing:0.04em;cursor:pointer;background:${active ? '#111' : 'transparent'};color:${active ? '#f4f4f2' : '#111'}`;
+    const toObj = css => Object.fromEntries(css.split(';').map(r => { const [k, v] = r.split(':'); return [k.replace(/-([a-z])/g, (_, c) => c.toUpperCase()), v]; }));
+    const count = Object.values(cart).reduce((a, b) => a + b, 0);
+    const total = Object.entries(cart).reduce((a, [id, q]) => a + this.products.find(p => p.id == id).price * q, 0);
+    const threshold = this.props.freeShipping ?? 50;
+    const isMobile = this.state.w < 820;
+    return {
+      isMobile, isDesktop: !isMobile,
+      menuOpen: isMobile && this.state.menuOpen,
+      menuLabel: this.state.menuOpen ? 'SCHLIESSEN' : 'MENÜ',
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      shippingNote: total >= threshold ? 'Gratis Versand freigeschaltet' : `Gratis Versand ab ${this.fmt(threshold)} · Versand in 48 h`,
+      cartCount: count,
+      cartOpen: this.state.cartOpen,
+      cartEmpty: count === 0,
+      openCart: () => this.setState({ cartOpen: true, menuOpen: false }),
+      closeCart: () => this.setState({ cartOpen: false }),
+      categories: cats.map((c, i) => ({ name: c, num: '0' + (i + 1), count: this.products.filter(p => p.cat === c).length, select: () => this.setState({ filter: c }) })),
+      filters: ['Alle', ...cats].map(f => ({ label: f, style: toObj(pill(f === filter)), select: () => this.setState({ filter: f }) })),
+      products: this.products.filter(p => filter === 'Alle' || p.cat === filter).map(p => ({
+        ...p, isNew: !!p.isNew, priceLabel: this.fmt(p.price),
+        btnLabel: cart[p.id] ? (isMobile ? `IM KORB (${cart[p.id]}) · +1` : `IM WARENKORB (${cart[p.id]}) · +1`) : (isMobile ? 'IN DEN KORB' : 'IN DEN WARENKORB'),
+        add: () => this.setQty(p.id, 1),
+      })),
+      cartItems: Object.entries(cart).map(([id, q]) => {
+        const p = this.products.find(x => x.id == id);
+        return { name: p.name, qty: q, lineLabel: this.fmt(p.price * q), inc: () => this.setQty(p.id, 1), dec: () => this.setQty(p.id, -1) };
+      }),
+      totalLabel: this.fmt(total),
+      subLabel: this.state.subscribed ? 'DANKE ✓' : 'ANMELDEN',
+      subscribe: e => { e.preventDefault(); this.setState({ subscribed: true }); },
+    };
+  }
+}
+</script>
+</body>
+</html>
